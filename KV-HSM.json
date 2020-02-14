@@ -1,0 +1,30 @@
+{
+  "properties": {
+    "displayName": "Require Key Vault HSM",
+    "policyType": "Custom",
+    "mode": "All",
+    "metadata": {
+      "category": "Key Vault"
+    },
+    "parameters": {},
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.KeyVault/vaults"
+          },
+          {
+            "not": {
+              "field": "Microsoft.KeyVault/vaults/sku.name",
+              "equals": "premium"
+            }
+          }
+        ]
+      },
+      "then": {
+        "effect": "deny"
+      }
+    }
+  }
+}
